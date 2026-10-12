@@ -1,0 +1,51 @@
+spring:
+  application:
+    name: be-1-task-scheduler
+
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/jobqueue}
+    username: ${SPRING_DATASOURCE_USERNAME:jobqueue}
+    password: ${SPRING_DATASOURCE_PASSWORD:jobqueue}
+    hikari:
+      connection-timeout: 3000
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+  data:
+    redis:
+      host: ${SPRING_DATA_REDIS_HOST:localhost}
+      port: ${SPRING_DATA_REDIS_PORT:6379}
+      timeout: 2s
+
+server:
+  port: ${SERVER_PORT:8080}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: api
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: worker
+  main:
+    web-application-type: none
+  flyway:
+    enabled: false
+
+app:
+  scheduling:
+    enabled: false

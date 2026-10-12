@@ -1,0 +1,1 @@
+ALTER TABLE jobs ALTER COLUMN next_retry_at DROP DEFAULT;

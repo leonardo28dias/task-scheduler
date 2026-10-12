@@ -1,0 +1,21 @@
+# Secrets / local configuration
+.env
+
+# Maven build output
+target/
+*.class
+
+# Logs
+*.log
+logs/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.settings/
+.project
+.classpath
+
+# OS
+.DS_Store
