@@ -1,9 +1,8 @@
-# BE-1 — Asynchronous Distributed Task Scheduler & Job Queue Engine
+# Asynchronous Distributed Task Scheduler & Job Queue Engine
 
 Backend service that accepts long-running jobs over HTTP, stores job state in
 PostgreSQL, queues work in Redis and executes it asynchronously on multiple workers.
 
-**Status: Phase 4 of 4 — validation, load testing, benchmarking and portfolio documentation.**
 
 The full architectural contract (job states, queue keys, retry rules) lives in
 [PROJECT_RULES.md](PROJECT_RULES.md).
@@ -154,7 +153,7 @@ The API also honours the standard Spring overrides (`SPRING_DATASOURCE_URL`,
 
 Run: `./mvnw -B test`. Reports: `target/surefire-reports/`.
 
-## 7. Phase 4: Load testing and benchmarking
+## Load testing and benchmarking
 
 The load runner is a standalone HTTP client that submits jobs concurrently, waits for
 every job to reach a terminal state and reports throughput:
@@ -168,7 +167,7 @@ java -jar target/jobqueue-0.1.0-SNAPSHOT.jar \\
 
 Output: `submitted=1200 succeeded=X deadLettered=0 unfinished=0 jobsPerMinute=...`.
 
-**Phase 4 requirement:** ≥ 1200 jobs/minute sustained across 3 workers, zero unfinished
+**Phase requirement:** ≥ 1200 jobs/minute sustained across 3 workers, zero unfinished
 and zero inconsistent states. `JobLoadTestRunner` exits non-zero on unfinished or
 inconsistent results, so the same gates can be reused for CI.
 
@@ -191,7 +190,7 @@ inconsistent results, so the same gates can be reused for CI.
 - Results are JSON (`jobs.result`), errors are capped at 500 characters (`jobs.last_error`).
 - New task handlers: implement `TaskHandler` and register in `TaskHandlerRegistry`.
 
-## 10. Phase 4 milestones and evidence
+## 10. Phase milestones and evidence
 
 | Milestone | Evidence |
 |-----------|----------|
